@@ -30,12 +30,12 @@ use LWP::Simple;
 use base qw(Koha::Plugins::Base);
 use C4::Auth;
 use C4::Context;
-use C4::Images;
+use Koha::CoverImages;
 use File::Spec;
 use JSON qw( encode_json );
 
 our $dbh      = C4::Context->dbh();
-our $VERSION  = 1.4;
+our $VERSION  = 1.5;
 our $metadata = {
     name            => 'PDFtoCover',
     author          => 'Mehdi Hamidi, Bouzid Fergani, Arthur Bousquet',
@@ -119,7 +119,7 @@ sub displayAffected {
     my ( $self, $args ) = @_;
     my $pdf = 0;
     my $query
-        = "SELECT count(*) as count FROM biblio_metadata AS a WHERE EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") <> '' and a.biblionumber not in (select biblionumber from biblioimages);";
+        = "SELECT count(*) as count FROM biblio_metadata AS a WHERE EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") <> '' and a.biblionumber not in (select biblionumber from cover_images);";
 
     my $stmt = $dbh->prepare($query);
     $stmt->execute();
@@ -137,7 +137,7 @@ sub genererVignette {
     my $ua = LWP::UserAgent->new( timeout => "5" );
 
     my $query
-        = "SELECT a.biblionumber, EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") AS url FROM biblio_metadata AS a WHERE EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") <> '' and a.biblionumber not in (select biblionumber from biblioimages);";
+        = "SELECT a.biblionumber, EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") AS url FROM biblio_metadata AS a WHERE EXTRACTVALUE(a.metadata,\"record/datafield[\@tag='856']/subfield[\@code='u']\") <> '' and a.biblionumber not in (select biblionumber from cover_images);";
 
     # Retourne 856$u, qui est le(s) URI(s) d'une ressource numérique
     my $sthSelectPdfUri = $dbh->prepare($query);
@@ -162,10 +162,19 @@ sub genererVignette {
                     `pdftocairo $save -png $save -singlefile 2>&1`;    # Conversion de pdf à png, seulement pour la première page
                     my $imageFile = $save . ".png";
                     push @filestodelete, $imageFile;
-
                     my $srcimage = GD::Image->new($imageFile);
                     my $replace  = 1;
-                    C4::Images::PutImage( $biblionumber, $srcimage, $replace );
+		    my $input = CGI->new;
+	            my $itemnumber = $input->param('itemnumber');
+
+                    Koha::CoverImage->new(
+                        {
+                           biblionumber => $biblionumber,
+                           itemnumber   => $itemnumber,
+                           src_image    => $srcimage
+                        }
+                    )->store;
+
                     foreach my $file (@filestodelete) {
                         unlink $file or warn "Could not unlink $file: $!\nNo more images to import.Exiting.";
                     }
