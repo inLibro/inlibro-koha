@@ -484,6 +484,9 @@ sub insertIntoPref{
 
         #expected ex opaclanguages = "fr-CA,en"
         my @languages = split /,/, $opaclanguages;
+        push @languages, 'default';
+        my $lang_exists = 0;
+
         #2. for each installed language
         foreach my $lang (@languages) {
             my $location = 'OpacMainUserBlock';
@@ -529,6 +532,7 @@ sub insertIntoPref{
 
             #2.1.2 if lang exists update
             if ( $additional_content ) {
+                $lang_exists = 1;
                 my $updated;
                 eval {
                     $additional_content->set({
@@ -548,8 +552,8 @@ sub insertIntoPref{
                     $additional_content->store;
                 };
             }
-            #2.1.3 else add new
-            else {
+            #2.1.3 else add new in default lang if lang are not used
+            elsif ( $lang eq 'default' && !$lang_exists ) {
                 my $additional_content = Koha::AdditionalContent->new({
                     category       => $category,
                     code           => $code || 'tmp_code',
