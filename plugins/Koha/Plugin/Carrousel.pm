@@ -52,7 +52,7 @@ BEGIN {
     $module->import;
 }
 
-our $VERSION = "4.1.0";
+our $VERSION = "4.1.1";
 our $metadata = {
     name            => 'Carrousel 4.1.1',
     author          => 'Mehdi Hamidi, Maryse Simard, Brandon Jimenez, Alexis Ripetti, Salman Ali',
