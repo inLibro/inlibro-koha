@@ -126,13 +126,77 @@ my @graph_presets = (
         query =>
             "SELECT lib, COUNT(*) FROM items JOIN authorised_values AS av ON av.authorised_value=items.location WHERE av.category='LOC' GROUP BY lib;"
     },
-    {   id      => 'graphs-accountlines-amount',
+    {   id      => 'graphs-accountlines-amount-credit',
         type    => 'bar',
-        title   => 'Amount per transaction type',
+        title   => 'Amount per credit transaction type',
         ylabels => ['Amount'],
         query =>
-            "SELECT IFNULL(de, IF(LEFT(accounttype,3)='Pay','Payment',accounttype)) AS label, SUM(amount) FROM accountlines LEFT JOIN (SELECT 'A' AS ty, 'Account management fee' AS de UNION SELECT 'C', 'Credit' UNION SELECT 'F', 'Overdue fine' UNION SELECT 'FOR', 'Forgiven' UNION SELECT 'FU', 'Overdue, still accruing' UNION SELECT 'L', 'Lost item' UNION SELECT 'LR', 'Lost item returned/refunded' UNION SELECT 'M', 'Sundry' UNION SELECT 'N', 'New card' UNION SELECT 'PAY', 'Payment' UNION SELECT 'W', 'Writeoff') AS descriptors ON accountlines.accounttype=descriptors.ty GROUP BY label ORDER BY SUM(amount);"
-    }        
+            "SELECT
+                IFNULL(de, IF(LEFT(credit_type_code,3)='Pay','Payment',credit_type_code)) AS label,
+                SUM(amount)
+            FROM accountlines
+            LEFT JOIN(
+                SELECT 'CANCELLATION' AS ty,    'Cancelled charge' AS de                UNION
+                SELECT 'CREDIT',                'Credit'                                UNION
+                SELECT 'DISCOUNT',              'A discount applied to a patrons fine'  UNION
+                SELECT 'FORGIVEN',              'Forgiven'                              UNION
+                SELECT 'LOST',                  'Lost item'                             UNION
+                SELECT 'LOST_FOUND',            'Lost item fee refund'                  UNION
+                SELECT 'OVERPAYMENT',           'Overpayment refund'                    UNION
+                SELECT 'PAYMENT',               'Payment'                               UNION
+                SELECT 'PROCESSING_FOUND',      'Lost item processing fee refund'       UNION
+                SELECT 'PURCHASE',              'Purchase'                              UNION
+                SELECT 'REFUND',                'Refund'                                UNION
+                SELECT 'WRITEOFF',              'Writeoff'
+            ) AS descriptors
+            ON
+                accountlines.credit_type_code=descriptors.ty
+            WHERE
+                credit_type_code is not NULL
+            GROUP BY
+                label
+            ORDER BY
+                SUM(amount);"
+    },
+    {   id      => 'graphs-accountlines-amount-debit',
+        type    => 'bar',
+        title   => 'Amount per debit transaction type',
+        ylabels => ['Amount'],
+        query =>
+            "SELECT
+                IFNULL(de, IF(LEFT(debit_type_code,3)='Pay', 'Payment', debit_type_code)) AS label,
+                SUM(amount)
+            FROM accountlines
+            LEFT JOIN (
+                SELECT 'ACCOUNT' AS ty,     'Account creation fee' AS de        UNION
+                SELECT 'ACCOUNT_RENEW',     'Account renewal fee'               UNION
+                SELECT 'ARTICLE_REQUEST',   'Article request fee'               UNION
+                SELECT 'LOST',              'Lost item'                         UNION
+                SELECT 'LOST_RETURN',       'Lost and return'                   UNION
+                SELECT 'MANUAL',            'Manual fee'                        UNION
+                SELECT 'NEW_CARD',          'New card fee'                      UNION
+                SELECT 'OVERDUE',           'Overdue fine'                      UNION
+                SELECT 'Pay',               'Payment'                           UNION
+                SELECT 'PAYOUT',            'Payment from library to patron'    UNION
+                SELECT 'PROCESSING',        'Lost item processing fee'          UNION
+                SELECT 'RENT',              'Rental fee'                        UNION
+                SELECT 'RENT_DAILY',        'Daily rental fee'                  UNION
+                SELECT 'RENT_DAILY_RENEW',  'Renewal of daily rental item'      UNION
+                SELECT 'RENT_RENEW',        'Renewal of rental item'            UNION
+                SELECT 'RESERVE',           'Hold fee'                          UNION
+                SELECT 'RESERVE_EXPIRED',   'Hold waiting too long'             UNION
+                SELECT 'VOID',              'Credit has been voided'            UNION
+                SELECT 'W',                 'Writeoff'
+            ) AS descriptors
+            ON
+                accountlines.debit_type_code=descriptors.ty
+            WHERE
+                debit_type_code IS NOT NULL
+            GROUP BY
+                label
+            ORDER BY
+                SUM(amount);"
+    }       
 );
 
 our $dbh = C4::Context->dbh();
