@@ -1,6 +1,7 @@
 {
 	"fr" : {
-		"Amount per transaction type":"Montant par type de transaction",
+		"Amount per credit transaction type":"Montant par type de transaction de crédit",
+		"Amount per debit transaction type":"Montant par type de transaction de débit",
 		"Budget allocation":"Répartition du budget",
 		"Items per branch":"Répartition des documents par sites",
 		"Items per location":"Documents par localisation",
@@ -31,14 +32,38 @@
 		"Amount":"Montant",
 		
 		"Account management fee":"Coût d'inscription",
-		"Credit":"Crédit",
-		"Overdue fine":"Amende",
-		"Forgiven":"Dette remise",
 		"Overdue, still acccruing":"",
-		"Lost item":"Exemplaire perdu",
-		"Lost item returned/refunded":"",
 		"Sundry":"Divers",
 		"New card":"Nouvelle carte",
-		"Payment":"Paiement"
+
+        "Cancelled charge":"Frais annulés",
+        "Credit":"Crédit",
+        "A discount applied to a patrons fine":"Rabais appliqué à l'amende d'un usager",
+        "Forgiven":"Dette remise",
+		"Lost item":"Exemplaire perdu",
+        "Lost item fee refund":"Remboursement d'un article perdu",
+        "Overpayment refund":"Remboursement d'un paiement en trop",
+        "Payment":"Paiement",
+        "Lost item processing fee refund":"Remboursement des frais de traitement d'un article perdu",
+        "Purchase":"Achat",
+        "Refund":"Remboursement",
+        "Writeoff":"Radiation",
+
+        "Account creation fee":"Frais d'inscription",
+        "Account renewal fee":"Frais de renouvellement de compte",
+        "Article request fee":"Frais de demande d'article",
+		"Lost and return":"Exemplaire perdu retourné",
+        "Manual fee":"Frais manuels",
+        "New card fee":"Frais de nouvelle carte",
+        "Overdue fine":"Amende de retard",
+        "Payment from library to patron":"Paiement de la bibliothèque à l'usager",
+        "Lost item processing fee":"Frais de traitement pour articles perdus",
+        "Rental fee":"Frais de location",
+        "Daily rental fee":"Frais de location quotidienne",
+        "Renewal of daily rental item":"Renouvellement d'un article en location quotidienne",
+        "Renewal of rental item":"Renouvellement d'un article en location",
+        "Hold fee":"Frais de réservation",
+        "Hold waiting too long":"Réservation avec une trop longue attente",
+        "Credit has been voided":"Le crédit a été annulé"
 	}
 }

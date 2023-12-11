@@ -51,7 +51,13 @@ function add_bar_chart(ctx, title, xlabels, ylabel, values) {
 				legend: {
 					display: false
 				},
+                scalesShowValues: true,
 				scales: {
+                    xAxes: [{
+                        ticks: {
+                            autoSkip: false
+                        }
+                    }],
 					yAxis: [{
 						stacked: false,
 						ticks: {
