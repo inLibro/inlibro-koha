@@ -1,0 +1,73 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head -->
+<title>Koha:SearchForDataInconsistencies Plugin</title>
+<link rel='stylesheet' type='text/css' href='[%PLUGIN_PATH%]/style.css'>
+<script type='text/javascript' src='[%PLUGIN_PATH%]/statchart.js'></script>
+<script type="text/javascript">
+    function init() {
+        /* This has to be called for all non-english pages but values
+         * should be in English by default. To improve performance in
+         * those cases, disable these two lines
+        locale = "en";
+        get_translations();
+        */
+    }
+
+    function toggle(source) {
+        checkboxes = document.getElementsByName('checkbox-preset');
+        for (var i = 0; i < checkboxes.length; i++)
+            checkboxes[i].checked = source.checked;
+    }
+
+    window.onload = init;
+</script>
+[% INCLUDE 'doc-head-close.inc' %]
+<!-- Body -->
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id='breadcrumbs'>
+    <a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; SearchForDataInconsistencies
+</div>
+<div id='doc3'>
+    <div id='content' align='center'>
+        <div id="inlibro-header" style="font-size: 14px; color: #696969; width: 450px;">
+            <p style="text-align: left;">Plugin created by</p>
+            <img width='450px' src='[%PLUGIN_PATH%]/images/inLibro_en.svg'/>
+            <p style="text-align: right; margin-bottom: 50px;">Visit our <a href="https://inlibro.com/en/">website</a> for more Koha plugins</p>
+        </div>
+        <div style='color: black; text-align: left;'>
+            <div style="width: 50%; margin: 0 auto;">
+                <center>
+                    <table>
+                        <tr>
+                            <th colspan="2" style="font-size: larger;">Check list</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                [% FOREACH item IN main_messages %]
+                                [% IF item == 'BLACK_LINE' %]
+                                <hr class="black-line">
+                                [% ELSE %]
+                                <p class="doc4">
+                                    <!-- Displaying method name in bold -->
+                                    <strong>[% item.method_name %]:</strong><br /> [% item.messages.join('<br />') %]
+                                </p>
+                                [% END %]
+                                [% END %]
+                            </td>
+                        </tr>
+                    </table>
+                <center>
+                <br>
+                <a href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS | uri %]&method=tool">
+                    <div align='middle'>
+                        <button id="back-button" type="button"> Back </button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+[% INCLUDE 'intranet-bottom.inc' %]
