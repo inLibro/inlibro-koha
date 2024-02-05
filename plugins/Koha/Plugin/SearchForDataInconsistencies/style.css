@@ -1,0 +1,68 @@
+td.td-graph {
+  background-color: rgb(84, 63, 5) !important;
+}
+
+div#form-selection {
+  width: 400px;
+  margin: 0 auto;
+}
+
+div#form-selection table {
+  width: 100%;
+}
+.doc4 {
+  font-size: 15px;
+  margin-bottom: 15px;
+  list-style-type: disc;
+
+}
+
+.doc5:nth-child(odd){
+  border-bottom: 1px solid #000;
+}
+
+tr:after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid black;
+}
+
+.space-element{
+  margin-bottom: 20 px;
+}
+
+td[id^="td-preset-"] {
+  padding: 10px 50px 20px;
+}
+
+
+#back-button{
+  background: #FFC32B none;
+  border: 1px solid #FFC32B;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: normal;
+  line-height: 1.42857143;
+  margin-bottom: 0;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0.5em 1em;
+}
+
+.black-line {
+  border-color: black;
+  border-style: solid; /* You might need to adjust the border style based on your design */
+  border-width: 1px;   /* Adjust the border width as needed */
+}
+
+.first-sentence {
+  font-weight: bold;  /* You can adjust the styling as needed */
+}

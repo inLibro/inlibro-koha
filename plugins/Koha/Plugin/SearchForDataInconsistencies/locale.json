@@ -1,0 +1,36 @@
+{
+	"fr" : {
+"Check items branch":"Vérifier les éléments de la branche",
+"Check items auth header":"Vérifier les en-têtes d'authentification des éléments",
+"Check items status":"Vérifier l'état des éléments",
+"Check items framework":"Vérifier le cadre des éléments",
+"Check items title":"Vérifier le titre des éléments",
+"Check age for category":"Vérifier l'âge pour la catégorie",
+
+		"Sunday":"Dimanche",
+		"Monday":"Lundi",
+		"Tuesday":"Mardi",
+		"Wednesday":"Mercredi",
+		"Thursday":"Jeudi",
+		"Friday":"Vendredi",
+		"Saturday":"Samedi",
+
+		"Loans":"Emprunts",
+		"Checkouts":"Emprunts",
+		"Check-ins":"Retours",
+		"Renewals":"Renouvellements",
+		"Reserves":"Réservations",
+		"Items":"Documents",
+		"Patrons":"Usagers",
+		"Amount":"Montant",
+
+		"Account management fee":"Coût d'inscription",
+		"Overdue, still acccruing":"",
+		"Sundry":"Divers",
+		"New card":"Nouvelle carte"
+
+
+
+
+	}
+}
