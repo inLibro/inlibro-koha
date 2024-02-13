@@ -6,6 +6,7 @@
 "Check items framework":"Vérifier le cadre des éléments",
 "Check items title":"Vérifier le titre des éléments",
 "Check age for category":"Vérifier l'âge pour la catégorie",
+"Check relationships":"Vérifier la relation",
 
 		"Sunday":"Dimanche",
 		"Monday":"Lundi",
@@ -23,7 +24,7 @@
 		"Items":"Documents",
 		"Patrons":"Usagers",
 		"Amount":"Montant",
-
+		
 		"Account management fee":"Coût d'inscription",
 		"Overdue, still acccruing":"",
 		"Sundry":"Divers",
@@ -31,6 +32,6 @@
 
 
 
-
+    
 	}
 }

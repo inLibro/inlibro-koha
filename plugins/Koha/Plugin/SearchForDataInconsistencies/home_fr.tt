@@ -31,7 +31,7 @@
         </div>
 		<div id='form-selection'>
 			<form method='get' name ='form-dataset-select'>
-				<h2>Generate data inconsistencies</h2>
+				<h2>Générer un rapport sur les incohérences des données</h2>
 				<!-- Necessary for the plugin to run, do not remove  -->
 				<input type='hidden' name='class' value='[% CLASS %]'/>
 				<input type='hidden' name='method' value='[% METHOD %]'/>
@@ -44,7 +44,7 @@
 					</tr>
 					[% i = 0 %][% FOREACH preset IN result_presets %]
 					<tr>
-						<td id="td-preset-[% i %]">
+						<td id="td-preset-[% i %]">	
 							[% preset.title %]
 						</td>
 
@@ -67,3 +67,8 @@
 </div>
 <!-- Footer-->
 [% INCLUDE 'intranet-bottom.inc' %]
+
+
+
+
+

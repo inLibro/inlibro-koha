@@ -11,14 +11,14 @@ div#form-selection table {
   width: 100%;
 }
 .doc4 {
-  font-size: 15px;
-  margin-bottom: 15px;
-  list-style-type: disc;
+  font-size: 15px; 
+  margin-bottom: 15px; 
+  list-style-type: disc; 
 
 }
 
 .doc5:nth-child(odd){
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #000; 
 }
 
 tr:after {
@@ -65,4 +65,22 @@ td[id^="td-preset-"] {
 
 .first-sentence {
   font-weight: bold;  /* You can adjust the styling as needed */
+}
+
+.checkBox {
+  color: white;
+  font-size: 50px; /* Adjust the font size as needed */
+}
+
+@keyframes colorChange {
+  0% { background-color: red; }
+  50% { background-color: blue; }
+  100% { background-color: green; }
+}
+
+/* Apply the animation to the cell */
+.colorBox {
+  width: 30px;
+  height: 30px;
+  animation: colorChange 5s infinite;
 }

@@ -39,7 +39,7 @@
         </div>
         <div id='form-selection'>
             <form method='get' name ='form-dataset-select'>
-                <h2>Generate data inconsistencies</h2>
+                <h2>Generates a report of data inconsistencies </h2>
                 <!-- Necessary inputs for the plugin to run, do not remove  -->
                 <input type='hidden' name='class' value='[% CLASS %]'/>
                 <input type='hidden' name='method' value='[% METHOD %]'/>
