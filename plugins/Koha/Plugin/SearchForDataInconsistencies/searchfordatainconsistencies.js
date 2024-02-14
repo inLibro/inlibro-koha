@@ -14,7 +14,7 @@ function get_translations() {
 	        dict = JSON.parse(this.responseText);
 			update_translations();
 	    }
-
+	   
 	};
 	xmlhttp.open("GET", "/plugin/Koha/Plugin/SearchForDataInconsistencies/locale.json", true);
 	xmlhttp.send();
@@ -35,3 +35,4 @@ function localize(str, loc) {
 		return str;
 	return dict[loc][str];
 }
+

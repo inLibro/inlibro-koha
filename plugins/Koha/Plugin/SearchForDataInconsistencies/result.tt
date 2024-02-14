@@ -2,7 +2,7 @@
 <!-- Head -->
 <title>Koha:SearchForDataInconsistencies Plugin</title>
 <link rel='stylesheet' type='text/css' href='[%PLUGIN_PATH%]/style.css'>
-<script type='text/javascript' src='[%PLUGIN_PATH%]/statchart.js'></script>
+<script type='text/javascript' src='[%PLUGIN_PATH%]/searchfordatainconsistencies.js'></script>
 <script type="text/javascript">
     function init() {
         /* This has to be called for all non-english pages but values
@@ -39,25 +39,88 @@
         <div style='color: black; text-align: left;'>
             <div style="width: 50%; margin: 0 auto;">
                 <center>
-                    <table>
-                        <tr>
-                            <th colspan="2" style="font-size: larger;">Check list</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                [% FOREACH item IN main_messages %]
-                                [% IF item == 'BLACK_LINE' %]
-                                <hr class="black-line">
-                                [% ELSE %]
-                                <p class="doc4">
-                                    <!-- Displaying method name in bold -->
-                                    <strong>[% item.method_name %]:</strong><br /> [% item.messages.join('<br />') %]
-                                </p>
-                                [% END %]
-                                [% END %]
-                            </td>
-                        </tr>
-                    </table>
+                        <table>
+                            <tr>
+                                <th class="colorBox" colspan="1" style="font-size: larger;">Test result</th>
+                                <th colspan="1" style="font-size: larger;">Description</th>
+                                <th colspan="1" style="font-size: larger;">What you should do as a good librarian</th>
+                            </tr>
+                            [% FOREACH item IN main_messages %]
+                            <tr>
+                                
+                                <td style="background-color: [% item.messages.join.trim.empty ? 'green' : 'red' %]; text-align: center; vertical-align: middle;">
+                                    [% IF item.messages.join.trim.empty %]
+                                        <span class="checkBox">v</span> 
+                                    [% ELSE %]
+                                        <span class="checkBox">x</span>
+                                    [% END %]
+                                </td>
+                                <td>
+                                    <strong>[% item.method_name %]:</strong><br /> 
+                                    [% FOREACH message IN item.messages %]
+                                    <p class="doc4">
+                                        [% message %]
+                                    </p>
+                                    [% END %]
+                                </td>
+                                <td>
+                                    <br />
+                                    [% IF item.method_name == "Items without home or holding library" %]
+                                        [% FOREACH pair IN item.numbers %]
+                                        <a href="/cgi-bin/koha/cataloguing/additem.pl?op=edititem&biblionumber=[% pair.1 %]&itemnumber=[% pair.0 %]">
+                                            <button style="margin-bottom: 15px;">Edit Item [% pair.0 %]</button>
+                                        </a>
+                                        [% END %]
+                                    [% END %]
+
+                                    [% IF item.method_name == "Authority records with invalid authority type" %]
+                                        [% FOREACH authid IN item.numbers %]
+                                            <a href="/cgi-bin/koha/authorities/authorities.pl?authid=[% authid %]">
+                                                <button style="margin-bottom: 15px;">Edit Authority Record [% authid %]</button>
+                                            </a> 
+                                        [% END %]
+                                    [% END %]
+
+                                    [% IF item.method_name == "Bibliographic records or items without an item type or with an invalid item type" %]
+                                        [% FOREACH pair IN item.numbers %]
+                                        
+                                        <a href="/cgi-bin/koha/cataloguing/additem.pl?op=edititem&biblionumber=[% pair.1 %]&itemnumber=[% pair.0 %]">
+                                            <button style="margin-bottom: 15px;">Edit Item [% pair.0 %]</button>
+                                        </a>
+                                        [% END %]
+                                    [% END %]
+
+
+                                    [% IF item.method_name == "Invalid values in fields where the framework limits to an authorized value category" %]
+                                        [% FOREACH pair IN item.numbers %]
+                                        <a href="/cgi-bin/koha/cataloguing/additem.pl?op=edititem&biblionumber=[% pair.1 %]&itemnumber=[% pair.0 %]">
+                                            <button style="margin-bottom: 15px;">Edit Item [% pair.0 %]</button>
+                                        </a>
+                                        [% END %]
+                                    [% END %]
+
+
+                                    [% IF item.method_name == 'Repetition of Biblio without title in 245$a' %]
+                                        [% FOREACH biblionumber IN item.numbers %]
+                                        <a href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=[% biblionumber %]">
+                                            <button style="margin-bottom: 15px;">Edit Record [% biblionumber %]</button>
+                                        </a>
+                                        [% END %]
+                                    [% END %]
+
+                                    [% IF item.method_name == 'Patrons with invalid age for their category' %]
+                                        [% FOREACH borrowernumber IN item.numbers %]
+                                        <a href="/cgi-bin/koha/members/memberentry.pl?op=modify&destination=circ&borrowernumber=[% borrowernumber %]">
+                                            <button style="margin-bottom: 15px;">Edit Patron [% borrowernumber %]</button>
+                                        </a>
+                                        [% END %]
+                                    [% END %]
+
+
+                                </td>
+                            </tr>
+                            [% END %]
+                        </table>
                 <center>
                 <br>
                 <a href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS | uri %]&method=tool">
@@ -70,4 +133,8 @@
     </div>
 </div>
 <!-- Footer -->
+
 [% INCLUDE 'intranet-bottom.inc' %]
+
+
+
