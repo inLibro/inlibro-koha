@@ -30,7 +30,7 @@ use C4::Context;
 our $VERSION = 1.11;
 our $metadata = {
     name            => 'ChangeDueDate',
-    author          => 'Mehdi Hamidi',
+    author          => 'Mehdi Hamidi, Hammat Wele',
     description     => 'Change the return date of items using filters',
     date_authored   => '2016-06-08',
     date_updated    => '2016-06-08',
