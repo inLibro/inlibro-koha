@@ -2,6 +2,8 @@
 <!-- Head-->
 <title>Koha:ChangeDueDate Plugin</title>
 [% INCLUDE 'doc-head-close.inc' %]
+<script type="text/javascript" src="[% PLUGIN_PATH %]/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="[% PLUGIN_PATH %]/css/jquery-ui.min.css" />
 <!-- Body-->
 [% INCLUDE 'header.inc' %]
 [% INCLUDE 'cat-search.inc' %]
