@@ -27,14 +27,14 @@ use base qw(Koha::Plugins::Base);
 use C4::Auth;
 use C4::Context;
 
-our $VERSION = 1.11;
+our $VERSION = 1.12;
 our $metadata = {
     name            => 'ChangeDueDate',
     author          => 'Mehdi Hamidi, Hammat Wele',
     description     => 'Change the return date of items using filters',
     date_authored   => '2016-06-08',
     date_updated    => '2016-06-08',
-    minimum_version => '3.20',
+    minimum_version => '23.05',
     maximum_version => undef,
     version         => $VERSION,
 };
