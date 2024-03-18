@@ -37,8 +37,6 @@ use base qw(Koha::Plugins::Base);
 use C4::Auth;
 use C4::Context;
 
-
-
 our $VERSION  = 1.2;
 our $metadata = {
     name            => 'SearchForDataInconsistencies',
@@ -53,7 +51,6 @@ our $metadata = {
 
 our $dbh = C4::Context->dbh();
 our $dir = C4::Context->config('intranetdir') . '/misc/maintenance/search_for_data_inconsistencies.pl';
-
 
 my @result_presets = (
     {
@@ -84,7 +81,6 @@ my @result_presets = (
         id    => 'Invalid guarantors relationships',
         title => "Check for relationships or dependencies between borrowers in a loop"
     }
-
 );
 
 my %method_map = (
@@ -172,10 +168,9 @@ sub tool {
 
 }
 
-
 sub check_items_branch {
     my @messages;
-    my $output = `$dir 1`;
+    my $output = `$dir --check-branch`;
 
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -191,7 +186,7 @@ sub check_items_branch {
 
 sub check_items_auth_header {
     my @messages;
-    my $output = `$dir 2`;
+    my $output = `$dir --check-auth`;
 
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -208,7 +203,7 @@ sub check_items_auth_header {
 
 sub check_items_status {
      my @messages;
-    my $output = `$dir 3`;
+    my $output = `$dir --check-status`;
 
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -224,7 +219,7 @@ sub check_items_status {
 
 sub check_items_framework {
     my @messages;
-    my $output = `$dir 4`;
+    my $output = `$dir --check-framework`;
    
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -240,7 +235,7 @@ sub check_items_framework {
 
 sub check_items_title {
     my @messages;
-    my $output = `$dir 5`;
+    my $output = `$dir --check-title`;
    
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -255,7 +250,7 @@ sub check_items_title {
 
 sub check_age_for_category {
     my @messages;
-    my $output = `$dir 6`;
+    my $output = `$dir --check-age`;
    
     # Split the modified output into messages
     @messages = split /\n/, $output;
@@ -273,7 +268,7 @@ sub check_age_for_category {
 
 sub check_relationships {
     my @messages;
-    my $output = `$dir 7`;
+    my $output = `$dir --check-loop`;
    
     # Split the modified output into messages
     @messages = split /\n/, $output;
