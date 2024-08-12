@@ -1,0 +1,127 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head-->
+
+<title>Koha: Rebuild Elastic Search Plugin</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<!-- Body-->
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> › <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> › RebuildElasticSearch</div>
+
+<!-- Displaying values -->
+
+<div style="margin: 20px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; max-width: 800px; margin: 0 auto;">
+
+    <img width='450px' src='[% PLUGIN_PATH %]/images/inLibro_en.svg'/>
+
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Index authorities:</h2>
+    <p style="font-size: 16px; line-height: 1.5; color: #666; margin: 10px 0;">Entries : 
+    <span style="font-weight: bold; color: #FF5733;">[% count_authorities %]</span></p>
+
+    <br>
+
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Index biblios</h2>
+    <p style="font-size: 16px; line-height: 1.5; color: #666; margin: 10px 0;">Entries : 
+    <span style="font-weight: bold; color: #FF5733;">[% count_biblios %]</span></p>
+    
+    <br>
+    
+    <form id="rebuildForm" method="post" style="font-size: 16px; color: #333; margin-top: 20px;"> 
+
+    <input type='hidden' name='class' value='[% CLASS %]'/>
+    <input type='hidden' name='method' value='[% METHOD %]'/>
+    <input type='hidden' name='action' value='generate'/>
+        <div id="commandsform">
+            <div>
+                <label for="commit">Commit</label>
+                <input type="number" name="commit" id="commit">
+                <p>Specify how many records will be batched up before they're added to Elasticsearch. Higher should be faster, but will cause more RAM usage. Default is 5000.</p>
+                <br>
+
+                <label for="processes">Number of processes</label>
+                <input type="number" name="processes" id="processes">
+                <p>Number of processes to use for indexing. This can be used to do more indexing work in parallel on multicore systems. By default, a single process is used.</p>
+                <br>
+
+                <label for="bnumber">Index supplied biblionumber</label>
+                <input type="number" name="bnumber" id="bnumber">
+                <p>Only index the supplied biblionumber, mostly for testing purposes. May be repeated.</p>
+                <br>
+
+                <label for="authid">Index supplied authority id</label>
+                <input type="number" name="authid" id="authid">
+                <p>Only index the supplied authority id, mostly for testing purposes. May be repeated.</p>
+                <br>
+            </div>
+            <div>
+                <label for="delete">Delete index</label>
+                <input type="checkbox" name="delete" id="delete">
+                <p>Delete the index and recreate it before indexing.</p>
+                <br>
+
+                <label for="reset">Reset mappings</label>
+                <input type="checkbox" name="reset" id="reset">
+                <p>Reload mappings from files (specified in koha-conf.xml) before indexing.</p>
+                <br>
+
+                <label for="descending">Index the records in descending id order</label>
+                <input type="checkbox" name="descending" id="descending">
+                <p>Index the records in descending id order. Intended to index newer record before older records. Default is to index in ascending order. 
+                    Does not work with supplied biblionumber or supplied authority</p>
+                <br>
+
+                <label for="authorities">Index authorities only</label>
+                <input type="checkbox" name="authorities" id="authorities">
+                <p>Index the authorities only. Combining this with "Index biblios only" is the same as specifying neither and so both get indexed.</p>
+                <br>
+
+                <label for="biblios">Index biblios only</label>
+                <input type="checkbox" name="biblios" id="biblios">
+                <p>Index the biblios only. Combining this with "Index authorities only" is the same as specifying neither and so both get indexed.</p>
+                <br>
+            </div>
+        </div>
+        <input type="submit" value="Execute">
+    </form>
+</div>
+<br>
+<div style="margin: 20px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; max-width: 800px; margin: 0 auto;white-space:pre-line;">
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Output</h2>
+    <br>
+    [% global_outputs %]
+<div>
+</div>
+
+<br><br>
+
+<script type="text/javascript">
+</script>
+
+<style>
+    #rebuildForm label {
+        width: 250px;
+        display: inline-block;
+    }
+
+    #rebuildForm input[type=number] {
+        margin-right: 60px;
+        width: 150px;
+    }
+
+    #rebuildForm p {
+        width: 250px;
+        font-size: 10px;
+        color: #666;
+    }
+
+    #commandsform {
+        display: flex;
+    }
+</style>
+
+[% INCLUDE 'intranet-bottom.inc' %]
+
+
+
+

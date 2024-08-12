@@ -1,0 +1,132 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head-->
+
+<title>Koha: Rebuild Elastic Search Plugin</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<!-- Body-->
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> › <a href="/cgi-bin/koha/plugins/plugins-home.pl">Extensions</a> › RebuildElasticSearch</div>
+
+<!-- Displaying values -->
+
+
+<div style="margin: 20px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; max-width: 800px; margin: 0 auto;">
+
+    <img width='450px' src='[% PLUGIN_PATH %]/images/inLibro_fr.svg'/>
+
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Index autorités:</h2>
+    <p style="font-size: 16px; line-height: 1.5; color: #666; margin: 10px 0;">Nombre d'entrées : 
+    <span style="font-weight: bold; color: #FF5733;">[% count_authorities %]</span></p>
+
+    <br>
+
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Index notices</h2>
+    <p style="font-size: 16px; line-height: 1.5; color: #666; margin: 10px 0;">Nombre d'entrées : 
+    <span style="font-weight: bold; color: #FF5733;">[% count_biblios %]</span></p>
+
+    <br>
+    
+    <form id="rebuildForm" method="post" style="font-size: 16px; color: #333; margin-top: 20px;"> 
+
+    <input type='hidden' name='class' value='[% CLASS %]'/>
+    <input type='hidden' name='method' value='[% METHOD %]'/>
+    <input type='hidden' name='action' value='generate'/>
+
+        <div id="commandsform">
+            <div>
+                <label for="commit">Validations</label>
+                <input type="number" name="commit" id="commit">
+                <p>Spécifier le nombre d'enregistrements qui seront regroupés avant d'être ajoutés à Elasticsearch. 
+                    Un nombre plus élevé devrait être plus rapide, mais entraînera une utilisation plus importante de la RAM. La valeur par défaut est 5 000.</p>
+                <br>
+
+                <label for="processes"> Nombre de processus</label>
+                <input type="number" name="processes" id="processes">
+                <p>Nombre de processus à utiliser pour l'indexation. Cela peut être utilisé pour effectuer davantage de travail 
+                    d'indexation en parallèle sur des systèmes multicœurs. Par défaut, un seul processus est utilisé.</p>
+                <br>
+
+                <label for="bnumber">Numéro de notice à réindexer</label>
+                <input type="number" name="bnumber" id="bnumber">
+                <p>Indexer uniquement le biblionumber fourni, principalement à des fins de test. Peut être répété.</p>
+                <br>
+
+                <label for="authid">Numéro de notice d'autorité à réindexer</label>
+                <input type="number" name="authid" id="authid">
+                <p>Indexer uniquement l'id d'autorité fourni, principalement à des fins de test. Peut être répété.</p>
+                <br>
+            </div>
+            <div>
+                <label for="delete">Supprimer l'index</label>
+                <input type="checkbox" name="delete" id="delete">
+                <p>Supprimer l'index et le recréer avant l'indexation.</p>
+                <br>
+
+                <label for="reset">Mettre à jour les mappages</label>
+                <input type="checkbox" name="reset" id="reset">
+                <p>Mettre à jour les mappages à partir des fichiers (spécifiés dans koha-conf.xml) avant l'indexation.</p>
+                <br>
+
+                <label for="descending">Indexer en ordre décroissant selon l'ID</label>
+                <input type="checkbox" name="descending" id="descending">
+                <p>Indexer les enregistrements dans l'ordre décroissant des identifiants. Destiné à indexer les enregistrements les plus 
+                    récents avant les enregistrements les plus anciens. La valeur par défaut est l'indexation dans l'ordre croissant. 
+                    Ne fonctionne pas avec le numéro de biblionumber ou l'id d'autorité fournis</p>
+                <br>
+
+                <label for="authorities">Indexer autorités seulement</label>
+                <input type="checkbox" name="authorities" id="authorities">
+                <p>Indexer uniquement les autorités. Combiner cette option avec « Indexer uniquement les notices » revient à ne 
+                    spécifier aucune des deux options et donc les deux seront indexées.</p>
+                <br>
+
+                <label for="biblios">Indexer notices seulement</label>
+                <input type="checkbox" name="biblios" id="biblios">
+                <p>Indexer uniquement les notices. Combiner cette option avec « Indexer uniquement les autorités » revient à ne 
+                    spécifier aucune des deux options et donc les deux seront indexées.</p>
+                <br>
+            </div>
+        </div>
+
+        <input type="submit" value="Exécuter">
+    </form>
+</div>
+<br>
+<div style="margin: 20px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; max-width: 800px; margin: 0 auto;white-space:pre-line;">
+    <h2 style="font-size: 24px; color: #333; margin-top: 20px;">Sortie</h2>
+    <br>
+    [% global_outputs %]
+<div>
+</div>
+
+<br><br>
+
+<script type="text/javascript">
+
+</script>
+
+<style>
+    #rebuildForm label {
+        width: 250px;
+        display: inline-block;
+    }
+
+    #rebuildForm input[type=number] {
+        margin-right: 60px;
+        width: 150px;
+    }
+
+    #rebuildForm p {
+        width: 250px;
+        font-size: 10px;
+        color: #666;
+    }
+
+    #commandsform {
+        display: flex;
+    }
+</style>
+
+[% INCLUDE 'intranet-bottom.inc' %]
