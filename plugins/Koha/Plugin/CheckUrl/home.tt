@@ -1,0 +1,40 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head -->
+<title>Koha:CheckUrl Plugin</title>
+<link rel='stylesheet' type='text/css' href='[%PLUGIN_PATH%]/style.css'>
+<script type="text/javascript">
+    function init() {
+        /* This has to be called for all non-english pages but values
+         * should be in English by default. To improve performance in
+         * those cases, disable these two lines
+        locale = "en";
+        get_translations();
+        */
+    }
+    window.onload = init;
+</script>
+[% INCLUDE 'doc-head-close.inc' %]
+<!-- Body -->
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+<div id='breadcrumbs'>
+    <a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; CheckUrl
+</div>
+<div id='doc3'>
+    <div id='content' align='center'>
+        <div id="inlibro-header" style="font-size: 14px; color: #696969; width: 450px;">
+            <p style="text-align: left;">Plugin created by</p>
+            <img width='450px' src='[%PLUGIN_PATH%]/images/inLibro_en.svg'/>
+            <p style="text-align: right;">Visit our <a href="https://inlibro.com/en/">website</a> for more Koha plugins</p>
+        </div>
+        <!-- Form to trigger the Check URL action -->
+        <form method="POST" action="[% script_name %]">
+            <input type='hidden' name='class' value='[% CLASS %]'/>
+            <input type='hidden' name='method' value='[% METHOD %]'/>
+            <input type="hidden" name="action" value="check_url">
+            <button type="submit" id="check-url">Check URL</button>
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+[% INCLUDE 'intranet-bottom.inc' %]

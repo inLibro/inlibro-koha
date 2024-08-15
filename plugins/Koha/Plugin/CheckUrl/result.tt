@@ -1,0 +1,22 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Koha: Check URL Results</title>
+[% INCLUDE 'doc-head-close.inc' %]
+
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id='breadcrumbs'>
+    <a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; CheckUrl
+</div>
+
+<div id='doc3'>
+    <div id='content' align='center'>
+        <h2>Check URL Results</h2>
+        <pre>
+[% script_output | html %]
+        </pre>
+        <a href="[% script_name %]">Back to Home</a>
+    </div>
+</div>
+
+[% INCLUDE 'intranet-bottom.inc' %]
