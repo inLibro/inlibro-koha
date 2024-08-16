@@ -24,7 +24,7 @@ our $VERSION = 1.0;
 
 our $metadata = {
     name   => 'CheckUrl',
-    author => 'Alexandre NOEL',
+    author => 'Alexandre Noël',
     description => 'Execute the script "check-url-quick.pl"',
     date_authored   => '2024-08-15',
     date_updated    => '2024-08-15',
@@ -56,7 +56,7 @@ sub PageResult {
     my $cgi      = $self->{'cgi'};
 
     # Execute the script and capture the output
-    my $path = C4::Context->config("intranetdir") . '/misc/cronjobs/check-url-quick.pl';
+    my $path = C4::Context->config("intranetdir") . "/misc/cronjobs/check-url-quick.pl --html --host ' '";
     my $script_output = qx($path);
 
     # Prepare the template

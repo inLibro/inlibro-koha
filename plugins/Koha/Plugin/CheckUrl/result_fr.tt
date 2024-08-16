@@ -1,25 +1,25 @@
 [% INCLUDE 'doc-head-open.inc' %]
-<title>Koha: Check URL Results</title>
+<title>Koha: Résultats Check URL</title>
 [% INCLUDE 'doc-head-close.inc' %]
 
 [% INCLUDE 'header.inc' %]
 [% INCLUDE 'cat-search.inc' %]
 
 <div id='breadcrumbs'>
-    <a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; CheckUrl
+    <a href='/cgi-bin/koha/mainpage.pl'>Acceuil</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Extensions</a> &rsaquo; CheckUrl
 </div>
 
 <div id='doc3'>
     <div id='content' style='padding: 2em;'>
-        <h2>Check URL Results</h2>
+        <h2>Check URL: Résultats</h2>
         [% IF script_output.match('<tr>') %]
             <pre>
             [% script_output %]
             </pre>
         [% ELSE %]
-            <p>All URLs are valid</p>
+            <p>Toutes les URLs sont valides</p>
         [% END %]
-        <a href="[% script_name %]">Back to Home</a>
+        <a href="[% script_name %]">Retour à l'acceuil</a>
     </div>
 </div>
 

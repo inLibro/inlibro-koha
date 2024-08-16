@@ -1,6 +1,6 @@
 [% INCLUDE 'doc-head-open.inc' %]
 <!-- Head -->
-<title>Koha:CheckUrl Plugin</title>
+<title>Koha:Extension Check URL</title>
 <script type="text/javascript">
     function init() {
         /* This has to be called for all non-english pages but values
@@ -17,14 +17,14 @@
 [% INCLUDE 'header.inc' %]
 [% INCLUDE 'cat-search.inc' %]
 <div id='breadcrumbs'>
-    <a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; CheckUrl
+    <a href='/cgi-bin/koha/mainpage.pl'>Acceuil</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Extensions</a> &rsaquo; CheckUrl
 </div>
 <div id='doc3'>
     <div id='content' style='padding: 2em;'>
         <div id="inlibro-header" style="font-size: 14px; color: #696969; width: 450px;">
-            <p style="text-align: left;">Plugin created by</p>
+            <p style="text-align: left;">Cette extension a été créée par</p>
             <img width='450px' src='[%PLUGIN_PATH%]/images/inLibro_en.svg'/>
-            <p style="text-align: right;">Visit our <a href="https://inlibro.com/en/">website</a> for more Koha plugins</p>
+            <p style="text-align: right;">Visitez notre <a href="https://inlibro.com/en/">site web</a> pour d'autres extensions Koha</p>
         </div>
         <!-- Form to trigger the Check URL action -->
         <form method="POST" action="[% script_name %]">
