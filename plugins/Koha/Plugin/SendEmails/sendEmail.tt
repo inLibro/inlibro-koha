@@ -1,0 +1,91 @@
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head-->
+<title>Koha:SendEmails Plugin</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% INCLUDE 'calendar.inc' %]
+<!-- Body-->
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id='breadcrumbs'><a href='/cgi-bin/koha/mainpage.pl'>Home</a> &rsaquo; <a href='/cgi-bin/koha/plugins/plugins-home.pl'>Plugins</a> &rsaquo; SendEmail</div>
+<div id='doc3' style="height: 90%; display: flex;" class="mainDiv" >
+	<div style="flex-grow: 1; display: grid; justify-content: center; align-items: center; margin-right: 2em; margin-left: 2em;" >
+		<div id="inlibro-header" style="font-size: 14px; color: #696969; width: 75% ">
+			<p style="text-align: left;">This plugin was created by</p>
+			<img width='450px' src='[% PLUGIN_PATH %]/images/inLibro_en.svg'/>
+			<p style="text-align: right;">Visit our <a href="https://inlibro.com/en/">website</a> pour d'autres extensions Koha</p>
+		</div>
+	</div>
+	<div id='content' style='flex-grow: 1; background: white; display: flex; flex-direction: column; align-items: center; min-width: fit-content; padding-left: 1em; padding-right: 1em; overflow: auto' class="marginBottom">
+			<div id="form" align='left' style='width:100%; display: flex; justify-content: center; flex-grow: 1; align-items: center;'>
+				<form method='post' style="background: white;">
+					<!-- Necessary for the plugin to run, do not remove  -->
+					<input type='hidden' name='class' value='[% CLASS %]'/>
+					<input type='hidden' name='method' value='[% METHOD %]'/>
+					<input type='hidden' name='action' value='SendEmail'/>
+					<!-- end of plugin necessary inputs  -->
+					<fieldset style="display: inline-grid; gap: 2em; justify-items: center;">
+						<input autocomplete="off" id="target" name="target" class="card-input ui-autocomplete-input" type="hidden" />
+						<div>
+							<p style="font-weight: bolder; ">Please enter the details of your email: </p>
+							<div style="display: flex; gap: 1em; flex-direction: column;"> 
+								<div style="min-width: fit-content; width: 100%; margin-right: auto; margin-left:auto;">  
+									<p>Subject:</p> <input style="width: 100%;" type="text" name="Subject"  id="Subject" required/>
+								</div>	
+								<div style="min-width: fit-content; width: 100%; margin-right: auto; margin-left:auto;"> 
+									<p>To:</p>   <input style="width: 100%;" type="email" name="To" id="To" required/> 
+								</div>
+								<div style="min-width: fit-content; width: 100%; margin-right: auto; margin-left:auto;"> 
+									<p>Body:</p>   <textarea style="width: 100%; height: 10em" type="text" name="Body" id="Body" required></textarea>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<input id="submit" type="submit" value="Submit" style="color: white; border: none; float: right; background-color: #59C134;" class="input"/>
+					</fieldset>
+				</form>
+			</div>
+			[% IF confirmation == 1 %]
+				<div id="confirmation" name="confirmation" class="dialog alert" style="background: #ECECEC; width: 100%">The email was successfully sent!</div>
+			[% END %]
+			[% IF confirmation == 0 %]
+				<div id="confirmation" name="confirmation" class="dialog alert" style="background: #ECECEC; width: 100%">The email failed to be sent.</div>
+			[% END %]
+	</div>
+</div>
+<!-- Footer-->
+
+
+<style>
+    .mainDiv {
+		flex-direction: column;
+		background: white;
+	}
+
+	.pb-2{padding-bottom: 2em;}
+
+
+	@media (min-width: 1200px){ 
+		.pb-2{padding-bottom: 0em;}
+
+		.mainDiv{
+			flex-direction: row;
+			background: #ECECEC;
+			margin-right: auto;
+			margin-left: auto;
+			max-width: fit-content;
+		}
+
+
+	}
+
+	html {height: 100%;}
+	body {height: 100%;}
+	#source-0 { display: none; }
+	.source-row { padding-bottom: 4px; }
+	.width {width: 100%;}
+	
+
+</style>
+[% INCLUDE 'intranet-bottom.inc' %]
