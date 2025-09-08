@@ -20,14 +20,14 @@ use JSON;
 use warnings;
 use strict;
 
-our $VERSION = 1.0;
+our $VERSION = 2.0;
 
 our $metadata = {
     name   => 'CheckUrl',
-    author => 'Alexandre Noël',
+    author => 'Alexandre Noël, Noah Tremblay',
     description => 'Execute the script "check-url-quick.pl"',
     date_authored   => '2024-08-15',
-    date_updated    => '2024-08-15',
+    date_updated    => '2025-09-08',
     minimum_version => '22.05.00',
     maximum_version => undef,
     version         => $VERSION,
