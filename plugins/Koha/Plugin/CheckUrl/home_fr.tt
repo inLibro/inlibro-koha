@@ -31,7 +31,7 @@
             <input type='hidden' name='class' value='[% CLASS %]'/>
             <input type='hidden' name='method' value='[% METHOD %]'/>
             <input type="hidden" name="action" value="check_url">
-            <button type="submit" id="check-url">Check URL</button>
+            <button type="submit" id="check-url">Vérifier les URL</button>
         </form>
     </div>
 </div>
