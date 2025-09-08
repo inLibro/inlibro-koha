@@ -20,14 +20,14 @@ use JSON;
 use warnings;
 use strict;
 
-our $VERSION = 1.0;
+our $VERSION = 2.0;
 
 our $metadata = {
     name   => 'CheckUrl',
-    author => 'Alexandre Noël',
+    author => 'Alexandre Noël, Noah Tremblay',
     description => 'Execute the script "check-url-quick.pl"',
     date_authored   => '2024-08-15',
-    date_updated    => '2024-08-15',
+    date_updated    => '2025-09-08',
     minimum_version => '22.05.00',
     maximum_version => undef,
     version         => $VERSION,
@@ -54,13 +54,25 @@ sub tool {
 sub PageResult {
     my ( $self, $args ) = @_;
     my $cgi      = $self->{'cgi'};
+    my $locale = $cgi->cookie('KohaOpacLanguage');
 
     # Execute the script and capture the output
     my $path = C4::Context->config("intranetdir") . "/misc/cronjobs/check-url-quick.pl --html --host ' '";
     my $script_output = qx($path);
 
-    # Prepare the template
-    my $template = $self->get_template( { file => 'result.tt' } );
+    # Find locale-appropriate template
+    my $template = undef;
+    eval {
+        $template =
+          $self->get_template( { file => "result_" . $locale . ".tt" } );
+    };
+    if ( !$template ) {
+        $locale = substr $locale, 0, 2;
+        eval {
+            $template = $self->get_template( { file => "result_$locale.tt" } );
+        };
+    }
+    $template = $self->get_template( { file => 'result.tt' } ) unless $template;
 
     # Pass the script output to the template
     $template->param( script_output => $script_output );

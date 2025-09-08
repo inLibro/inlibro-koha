@@ -14,7 +14,10 @@
         <h2>Check URL: Résultats</h2>
         [% IF script_output.match('<tr>') %]
             <pre>
-            [% script_output %]
+            [% script_output 
+                 | replace("404 Not Found", "404 Fichier introuvable")
+                 | replace("599 Only http and https URL schemes supported", "599 Seuls les protocoles http et https sont acceptés")
+            %]
             </pre>
         [% ELSE %]
             <p>Toutes les URLs sont valides</p>
