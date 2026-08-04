@@ -1,0 +1,34 @@
+[% PROCESS 'i18n.inc' %]
+[%- TRY %]
+    [%- PROCESS "$PLUGIN_DIR/i18n/${LANG}.inc" %]
+[%- CATCH %]
+    [%- PROCESS "$PLUGIN_DIR/i18n/default.inc" %]
+[%- END %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% T.resultpage_title | html %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+
+[% WRAPPER "wrapper-staff-tool-plugin.inc" method="tool" plugin_title=T.title %]
+<div id='doc3'>
+    <div id='content' style='padding: 2em;'>
+        <h2>[% T.result_list_title | html %]</h2>
+        [% IF script_output.match('<tr>') %]
+            <pre>
+            [% script_output
+                 | replace("403 Forbidden", T.error_403 )
+                 | replace("404 Not Found", T.error_404 )
+                 | replace("595 Connection refused", T.error_595 )
+                 | replace("599 Only http and https URL schemes supported", T.error_599 )
+            %]
+            </pre>
+        [% ELSE %]
+            <p>[% T.all_url_valid | html %]</p>
+        [% END %]
+        <a href="[% script_name %]">[% T.back_home_link | html %]</a>
+    </div>
+</div>
+[% END %]
+
+
+[% INCLUDE 'intranet-bottom.inc' %]

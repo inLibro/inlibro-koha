@@ -1,0 +1,38 @@
+[% USE raw %]
+
+[% PROCESS 'i18n.inc' %]
+[%- TRY %]
+    [%- PROCESS "$PLUGIN_DIR/i18n/${LANG}.inc" %]
+[%- CATCH %]
+    [%- PROCESS "$PLUGIN_DIR/i18n/default.inc" %]
+[%- END %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<!-- Head -->
+<title>[% T.mainpage_title | html %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<!-- Body -->
+
+[% WRAPPER "wrapper-staff-tool-plugin.inc" method="tool" plugin_title=T.title %]
+
+<div id='doc3'>
+    <div id='content' style='padding: 2em;'>
+        <div id="inlibro-header" style="font-size: 14px; color: #696969; width: 450px;">
+            <p style="text-align: left;">[% T.created_by | html %]</p>
+            <img width='450px' src='[%PLUGIN_PATH%]/images/inLibro_en.svg'/>
+            <p style="text-align: right;">[% T.website | $raw %]</p>
+        </div>
+        <!-- Form to trigger the Check URL action -->
+        <form method="POST">
+            [% INCLUDE 'csrf-token.inc' %]
+            <input type='hidden' name='class' value='[% CLASS | html %]'/>
+            <input type='hidden' name='method' value='[% METHOD | html %]'/>
+            <input type="hidden" name="action" value="check_url">
+            <button type="submit" id="check-url">[% T.check_url_button | html %]</button>
+        </form>
+    </div>
+</div>
+[% END %]
+
+<!-- Footer -->
+[% INCLUDE 'intranet-bottom.inc' %]
