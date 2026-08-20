@@ -12,9 +12,9 @@
         all_url_valid = "All URLs are valid",
         back_home_link = "Back to Home",
 
-        error_404 = "404 File not found",
-        error_599 = "599 Only http and https URL schemes supported",
-        error_595 = "595 Connection refused",
         error_403 = "403 Forbidden",
+        error_404 = "404 File not found",
+        error_595 = "595 Connection refused",
+        error_599 = "599 Only http and https URL schemes supported",
     }
 %]
