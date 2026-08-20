@@ -7,10 +7,8 @@
     [%- PROCESS "$PLUGIN_DIR/i18n/default.inc" %]
 [%- END %]
 
-[% INCLUDE 'doc-head-open.inc' %]
 <!-- Head -->
 <title>[% T.mainpage_title | html %]</title>
-[% INCLUDE 'doc-head-close.inc' %]
 <!-- Body -->
 
 [% WRAPPER "wrapper-staff-tool-plugin.inc" method="tool" plugin_title=T.title %]

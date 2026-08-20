@@ -12,9 +12,9 @@
         all_url_valid = "Toutes les URLs sont valides",
         back_home_link = "Retour à l'acceuil",
 
-        error_404 = "404 Fichier introuvable",
-        error_599 = "599 Seuls les protocoles http et https sont acceptés",
-        error_595 = "595 Connection refusé",
         error_403 = "403 Non autorisé",
+        error_404 = "404 Fichier introuvable",
+        error_595 = "595 Connexion refusée",
+        error_599 = "599 Seuls les protocoles http et https sont acceptés",
     }
 %]
